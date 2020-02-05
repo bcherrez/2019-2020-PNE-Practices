@@ -16,3 +16,4 @@ def fibo(n):
 print("The 5th term of the fibonacci series is:",fibo(5))
 print("The 10th term of the fibonacci series is:",fibo(10))
 print("The 15th term of the fibonacci series is:",fibo(15))
+
