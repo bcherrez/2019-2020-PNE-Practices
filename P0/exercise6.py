@@ -1,7 +1,7 @@
 from Seq0 import *
 
 PRACTICE = 6
-FOLDER = "../Session-04/"
+FOLDER = "../Session4/"
 EXT = ".txt"
 GENES = ["U5", "ADA", "FRAT1", "FXN", "U5"]
 BASES = ['A', 'C', 'T', 'G']
@@ -14,3 +14,5 @@ seq = seq_read_fasta(FOLDER + GENES[0] + EXT)[:20]
 rev = seq_reverse(seq)
 print(f"Frag: {seq}")
 print(f"Rev : {rev}")
+
+

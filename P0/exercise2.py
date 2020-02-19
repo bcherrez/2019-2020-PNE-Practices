@@ -1,9 +1,17 @@
-#EX2
-def seq_read_fasta(filename):
-    file_cocntents = Path(filename).read_text()
-    seq_dna = file_contents
-    index_finish = seq_dna.find('\n')
-    seq_dna = seq_dna[index_finish + 1:]
-    seq_dna = seq_dna.replace("\n", "")
-    seq_dna = seq_dna[:20] #until base 20
-    return seq_dna
+
+from Seq0 import *
+
+FOLDER = "../Session4/"
+FILENAME = "U5.txt"
+
+DNA_FILE = FOLDER + FILENAME
+
+# -- Open the DNA file
+seq = seq_read_fasta(DNA_FILE)
+
+print("------> Exercise 2")
+print(f"DNA file: {FILENAME}")
+
+print("The first 20 bases are:")
+print(seq[:20])
+

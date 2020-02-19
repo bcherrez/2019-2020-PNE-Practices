@@ -1,8 +1,10 @@
-#EX3
-def seq_len(filename):
-    file_contents = Path(filename).read_text()
-    seq_dna = file_contents
-    index_finish = seq_dna.find('\n')
-    seq_dna = seq_dna[index_finish + 1:]
-    seq_dna = seq_dna.replace("\n", "")
-    return len(seq_dna)
+from Seq0 import *
+
+FOLDER = "../Session4/"
+EXT = ".txt"
+GENES = ["U5", "ADA", "FRAT1", "FXN", "U5"]
+
+print("-----| Exercise 3 |------")
+for gene in GENES:
+    seq = seq_read_fasta(FOLDER + gene + EXT)
+    print(f"Gene {gene} ---> Length: {seq_len(seq)}")
