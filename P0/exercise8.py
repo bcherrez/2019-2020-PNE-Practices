@@ -1,3 +1,4 @@
+
 from Seq0 import *
 
 PRACTICE = 8
@@ -22,3 +23,4 @@ for gene in GENES:
 
     # -- Print the base
     print(f"Gene {gene}: Most frequent Base: {BASES[ll.index(m)]}")
+
