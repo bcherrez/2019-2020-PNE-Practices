@@ -3,28 +3,24 @@ from pathlib import Path
 
 class Seq:
 
-    # -- Identification string for the Null and Invalid sequences
     NULL = "NULL"
     ERROR = "ERROR"
 
     def __init__(self, strbases=NULL):
-        """Constructor:
-        :type strbases: string with the bases of the sequence
-        """
 
-        # -- Check if it is the null seq
+        # si es una secuencia nula:
         if strbases == self.NULL:
             self.strbases = self.NULL
             print("NULL Seq created")
             return
 
-        # -- Check if the string passed by the user is valid
+        # comprueba si es string metido por el user es válido
         if not self.valid_str(strbases):
             self.strbases = self.ERROR
             print("INVALID Seq!")
             return
 
-        # -- Store the string in the object
+     #GUARDA EL STRING EN EL OBJETO
         self.strbases = strbases
         print("New sequence created!")
 
@@ -36,19 +32,12 @@ class Seq:
         print("PING OK")
 
     @staticmethod
-    def valid_str(strbases):
-        """Check if the string is valid or not"""
-
-        # -- Valid bases
+    def valid_str(strbases): #comprueba si la base es válida
         valid_bases = ['A', 'C', 'T', 'G']
 
         for b in strbases:
-
-            # -- IF one base is not valid...
             if b not in valid_bases:
                 return False
-
-        # -- All the bases are valid --> the string is valid
         return True
 
     def len(self):
@@ -58,61 +47,34 @@ class Seq:
             return len(self.strbases)
 
     def read_fasta(self, filename):
-        """
-            Read a file with a DNA sequence in FASTA format
-            :param filename: String
-            """
-
-        # -- Read the file
+        # lee el archivo
         contents = Path(filename).read_text()
-
-        # -- Remove the head
         body = contents.split('\n')[1:]
 
-        # -- Store the sequence read from the file
+        # guarda la secuencia del archivo
         self.strbases = "".join(body)
         return self
 
     def count_base(self, base):
-        """
-        Counting the given base on the sequence
-        :param base: Character
-        :return: Integer
-        """
+
         return self.strbases.count(base)
 
-    def count(self):
-        """
-        Calculate the number of bases in the sequence
-        :return: Dictionary with the results
-        """
+    def count(self): #numero de veces que se repite una base
         res = {'A': self.count_base('A'), 'T': self.count_base('T'),
                'C': self.count_base('C'), 'G': self.count_base('G')}
         return res
 
     def reverse(self):
-        """
-        Return the reverse sequence
-        :return: String
-        """
         if self.strbases in [self.NULL, self.ERROR]:
             return self.strbases
         else:
-            return self.strbases[::-1]
+            return self.strbases[::-1]  # lo pone del revés
 
-    def complement(self):
-        """
-        Return the complement sequence
-        :return: String
-        """
-
-        # -- In case of Null or invalid sequences the
-        # -- complement is not calculated
-        if self.strbases in [self.NULL, self.ERROR]:
+    def complement(self): #devuelve bases complementarias
+        if self.strbases in [self.NULL, self.ERROR]:  # si es una sequencia inválida o nula imprime error
             return self.strbases
 
-        # -- Dictionary of complement bases
-        basec = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+        basec = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'} #diccionario de las bases complementarias
 
         res = ""
 
