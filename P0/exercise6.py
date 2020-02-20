@@ -6,7 +6,7 @@ EXT = ".txt"
 GENES = ["U5", "ADA", "FRAT1", "FXN", "U5"]
 BASES = ['A', 'C', 'T', 'G']
 
-print(f"-----| Exercise {PRACTICE} |------")
+print(f"Exercise {PRACTICE} ")
 
 GENE = GENES[0]
 print(f"Gene {GENE}:")

@@ -9,7 +9,7 @@ DNA_FILE = FOLDER + FILENAME
 # -- Open the DNA file
 seq = seq_read_fasta(DNA_FILE)
 
-print("------> Exercise 2")
+print("Exercise 2")
 print(f"DNA file: {FILENAME}")
 
 print("The first 20 bases are:")

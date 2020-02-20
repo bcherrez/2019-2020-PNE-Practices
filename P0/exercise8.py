@@ -2,12 +2,12 @@
 from Seq0 import *
 
 PRACTICE = 8
-FOLDER = "../Session-04/"
+FOLDER = "../Session4/"
 EXT = ".txt"
 GENES = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 BASES = ['A', 'T', 'C', 'G']
 
-print(f"-----| Exercise {PRACTICE} |------")
+print(f"Exercise {PRACTICE}")
 
 for gene in GENES:
     seq = seq_read_fasta(FOLDER + gene + EXT)
@@ -23,4 +23,3 @@ for gene in GENES:
 
     # -- Print the base
     print(f"Gene {gene}: Most frequent Base: {BASES[ll.index(m)]}")
-
