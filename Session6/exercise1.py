@@ -2,18 +2,14 @@ class Seq:
     """A class for representing sequences"""
 
     def __init__(self, strbases):
-
-        # Initialize the sequence with the value
-        # passed as argument when creating the object
-
-        # -- Valid bases
+        # inicia la secuencia con el valor.
+        # pasa como un argumento al crear el objeto
         bases = ['A', 'C', 'G', 'T']
 
-        # -- Check that the string used for the initialization
-        # -- only contains valid bases
+        # comprobar  que las secuencias dadas sean correctas
         for b in strbases:
             if b not in bases:
-                print("ERROR!!")
+                print("ERROR!")
                 self.strbases = "ERROR"
                 return
 
@@ -22,13 +18,10 @@ class Seq:
         print("New sequence created!")
 
     def __str__(self):
-        """Method called when the object is being printed"""
-
-        # -- We just return the string with the sequence
+        #Method called when the object is being printed#
         return self.strbases
 
     def len(self):
-        """Calculate the length of the sequence"""
         return len(self.strbases)
 
 

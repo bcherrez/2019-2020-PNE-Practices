@@ -3,20 +3,11 @@ import termcolor
 
 class Seq:
     """A class for representing sequences"""
-
     def __init__(self, strbases):
-
-        # Initialize the sequence with the value
-        # passed as argument when creating the object
-
-        # -- Valid bases
         bases = ['A', 'C', 'G', 'T']
-
-        # -- Check that the string used for the initialization
-        # -- only contains valid bases
         for b in strbases:
             if b not in bases:
-                print("ERROR!!")
+                print("ERROR!")
                 self.strbases = "ERROR"
                 return
 
@@ -25,34 +16,26 @@ class Seq:
         print("New sequence created!")
 
     def __str__(self):
-        """Method called when the object is being printed"""
-
-        # -- We just return the string with the sequence
         return self.strbases
 
     def len(self):
-        """Calculate the length of the sequence"""
         return len(self.strbases)
 
 
 def print_seqs(seqs, color):
-    """Print a list of sequences"""
     for seq in seqs:
         termcolor.cprint(f"Sequence {seqs.index(seq)}: (Length: {seq.len()}) {seq}", color)
 
 
 def generate_seqs(pattern, number):
-    """Generate a list of sequences in which the give patter is repeated
-       from 1 to number
-       Return a list with all the sequences
-    """
+    #crea una lista de secuencias en el que se repite de 1 al número, lista con secuencias
     seqs = []
 
     for i in range(1, number + 1):
         seqs.append(Seq(pattern * i))
 
     return seqs
-
+ping
 
 # -- Main program
 
