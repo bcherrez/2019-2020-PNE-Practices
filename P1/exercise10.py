@@ -3,7 +3,7 @@ from Seq1 import *
 PRACTICE = 1
 EXERCISE = 10
 
-FOLDER = "../Session4/"
+FOLDER = "../Session04/"
 EXT = ".txt"
 GENES = ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]
 BASES = ['A', 'T', 'C', 'G']
