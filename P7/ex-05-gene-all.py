@@ -109,7 +109,6 @@ mpa = max(list_A)
 
 i = list_A.index(mpa)
 
-
 genes_list = list(GENES.keys())
 
 

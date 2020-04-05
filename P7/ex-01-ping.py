@@ -19,7 +19,6 @@ try:
 except ConnectionRefusedError:
     print("ERROR! Cannot connect to the Server")
     exit()
-
 # Read the response message from the server
 r1 = conn.getresponse()
 

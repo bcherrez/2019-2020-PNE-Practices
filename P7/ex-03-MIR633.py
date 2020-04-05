@@ -39,7 +39,6 @@ except ConnectionRefusedError:
 
 r1 = conn.getresponse()
 
-
 print(f"Response received!: {r1.status} {r1.reason}\n")
 
 

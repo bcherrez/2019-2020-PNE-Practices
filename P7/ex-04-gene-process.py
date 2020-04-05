@@ -94,9 +94,7 @@ d = s.count()
 #Create a list with all the values
 ll = list(d.values())
 
-
 m = max(ll)
-
 
 termcolor.cprint("Most frequent Base", 'green', end="")
 print(f": {BASES[ll.index(m)]}")

@@ -12,7 +12,6 @@ GENES = {
     'KDR': 'ENSG00000128052',
     'ANK2': 'ENSG00000145362',
 }
-
 print()
 print("Dictionary of Genes!")
 print(f"There are {len(GENES)} genes in the dicctionary:\n")
