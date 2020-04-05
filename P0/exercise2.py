@@ -1,7 +1,7 @@
 
 from Seq0 import *
 
-FOLDER = "../Session4/"
+FOLDER = "../Session04/"
 FILENAME = "U5.txt"
 
 DNA_FILE = FOLDER + FILENAME

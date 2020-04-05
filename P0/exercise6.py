@@ -1,7 +1,7 @@
 from Seq0 import *
 
 PRACTICE = 6
-FOLDER = "../Session4/"
+FOLDER = "../Session04/"
 EXT = ".txt"
 GENES = ["U5", "ADA", "FRAT1", "FXN", "U5"]
 BASES = ['A', 'C', 'T', 'G']
