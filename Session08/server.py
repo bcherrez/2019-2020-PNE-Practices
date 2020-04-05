@@ -4,7 +4,7 @@ import termcolor
 
 
 PORT = 8080
-IP = "192.168.124.179"
+IP = "127.0.0.1"
 MAX_OPEN_REQUESTS = 50
 
 # Counting the number of connections
@@ -31,7 +31,7 @@ try:
         print("Message from client: ", end="")
         termcolor.cprint(msg.decode("utf-8"), 'green')
 
-        message = "\n\nHello from the teacher's server\n\n"
+        message = "\n\nHello I´m Belén Chérrez\n\n"
         send_bytes = str.encode(message)
 
         clientsocket.send(send_bytes)
