@@ -11,7 +11,7 @@ person = json.loads(jsonstring)
 # Person is now a dictionary. We can read the values
 # associated to the fields 'Firstname', 'Lastname' and 'age'
 
-#Read Firtname
+
 firstname = person['Firstname']
 lastname = person['Lastname']
 age = person['age']

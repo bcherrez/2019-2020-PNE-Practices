@@ -33,7 +33,7 @@ person = json.loads(data1)
 
 print("CONTENT: ")
 
-# Print the information in the object
+
 print()
 termcolor.cprint("Name: ", 'green', end="")
 print(person['Firstname'], person['Lastname'])

@@ -51,7 +51,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         self.end_headers()
 
-        # Send the response message
+
         self.wfile.write(str.encode(contents))
 
         return

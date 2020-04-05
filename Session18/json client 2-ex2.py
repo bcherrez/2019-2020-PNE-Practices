@@ -26,7 +26,7 @@ print(f"Response received!: {r1.status} {r1.reason}\n")
 
 data1 = r1.read().decode("utf-8")
 
-# Create a variable with the data, form the JSON received
+
 persons = json.loads(data1)
 
 print("CONTENT: ")

@@ -35,3 +35,4 @@ for person in persons:
         print(num['type'])
         termcolor.cprint("    Number: ", 'red', end='')
         print(num['number'])
+

@@ -21,7 +21,7 @@ print(person['age'])
 
 phoneNumbers = person['phoneNumber']
 
-# Print the number of elements int the list
+
 termcolor.cprint("Phone numbers: ", 'green', end='')
 print(len(phoneNumbers))
 

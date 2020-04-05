@@ -44,7 +44,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             error_code = 404
 
         # Generating the response message
-        self.send_response(error_code)  # -- Status line: OK!
+        self.send_response(error_code)
 
         # Define the content-type header:
         self.send_header('Content-Type', content_type)
