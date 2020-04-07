@@ -11,7 +11,7 @@ s.connect((IP, PORT))
 
 s.send(str.encode("HELLO FROM THE CLIENT!!!"))
 
-
+#Receive data from the server
 msg = s.recv(2048)
 print("MESSAGE FROM THE SERVER:\n")
 print(msg.decode("utf-8"))
