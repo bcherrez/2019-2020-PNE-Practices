@@ -6,13 +6,13 @@ EXERCISE = 4
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
-IP = "192.168.1.45"
+IP = "192.168.1.105"
 PORT = 8080
 
-c = Client(IP, PORT)
+clnt = Client(IP, PORT)
 
-print(c)
+print(clnt)
 
 # -- Send a message to the server
-c.debug_talk("Message 1---")
-c.debug_talk("Message 2: Testing !!!")
+clnt.debug_talk("First message")
+clnt.debug_talk("Second message")

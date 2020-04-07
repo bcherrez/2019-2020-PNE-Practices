@@ -1,4 +1,3 @@
-
 from Client0 import Client
 
 PRACTICE = 2
@@ -7,12 +6,12 @@ EXERCISE = 1
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
 
-IP = "192.168.1.45"
+IP = "192.168.1.105"
 PORT = 8080
 
-c = Client(IP, PORT)
+clnt = Client(IP, PORT)
 
 # -- Test the ping method
-c.ping()
+clnt.ping()
 
-print(f"IP: {c.ip}, {c.port}")
+print(f"IP: {clnt.ip}, {clnt.port}")

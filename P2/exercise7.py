@@ -7,18 +7,18 @@ EXERCISE = 7
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
-IP = "192.168.1.45"
+IP = "192.168.1.105"
 PORT = 8080
 
-FOLDER = "../Session-04/"
+FOLDER = "../Session04/"
 EXT = ".txt"
 GENE = "FRAT1"
 
-c1 = Client(IP, PORT)
-c2 = Client(IP, PORT + 1)
+clnt1 = Client(IP, PORT)
+clnt2 = Client(IP, PORT + 1)
 
-print(c1)
-print(c2)
+print(clnt1)
+print(clnt2)
 
 s = Seq().read_fasta(FOLDER + GENE + EXT)
 
@@ -29,23 +29,23 @@ print(f"Gene {GENE}: {bases}")
 LENGTH = 10
 
 # -- Send the initial message to both servers
-init_msg = f"Sending {GENE} Gene to the server, in fragments of {LENGTH} bases..."
+initial_message = f"Sending {GENE} Gene to the server, in fragments of {LENGTH} bases..."
 
-c1.talk(init_msg)
-c2.talk(init_msg)
+clnt1.talk(initial_message)
+clnt2.talk(initial_message)
 
 for i in range(10):
 
-    frag = bases[i*LENGTH:(i+1)*LENGTH]
+    fragment = bases[i*LENGTH:(i+1)*LENGTH]
 
-    print(f"Fragment {i+1}: {frag}")
+    print(f"Fragment {i+1}: {fragment}")
 
-    msg = f"Fragment {i+1}: {frag}"
+    message = f"Fragment {i+1}: {fragment}"
 
     # -- even fragments (counting from 0) are sent to server 1
     if i % 2:
-        c2.talk(msg)
+        clnt2.talk(message)
 
     # -- Odd segments are sent to server 2
     else:
-        c1.talk(msg)
+        clnt1.talk(message)

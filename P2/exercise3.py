@@ -6,14 +6,14 @@ EXERCISE = 3
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
 
-IP = "192.168.1.45"
+IP = "192.168.1.105"
 PORT = 8080
 
-c = Client(IP, PORT)
+clnt = Client(IP, PORT)
 
-print(c)
+print(clnt)
 
 # -- Send a message to the server
 print("Sending a message to the server...")
-response = c.talk("Testing!!!")
+response = clnt.talk("Hi, I am Belén")
 print(f"Response: {response}")
