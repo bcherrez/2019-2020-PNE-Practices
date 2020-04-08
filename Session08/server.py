@@ -2,8 +2,8 @@ import socket
 
 
 PORT = 8080
-IP = "192.168.1.105 "
-# 127.0.0.1 ip ordenador
+IP = "127.0.0.1"
+# ip ordenador 192.168.1.105
 
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serversocket.bind((IP, PORT))
@@ -12,8 +12,7 @@ serversocket.listen(50)
 #  max_connections
 
 while True:
-    print("Waiting for connections")
-    (clientsocket, address) = serversocket.accept()
+    (clientsocket,address) = serversocket.accept()
 
 # The server waits for the message to arrive
     msg = clientsocket.recv(2000)
