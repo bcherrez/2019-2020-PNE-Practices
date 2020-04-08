@@ -1,5 +1,6 @@
 from Client0 import Client
 
+
 PRACTICE = 3
 EXERCISE = 7
 
@@ -9,42 +10,42 @@ IP = "127.0.0.1"
 PORT = 8080
 
 # Configure the client
-c = Client(IP, PORT)
-print(c)
+clnt = Client(IP, PORT)
+print(clnt)
 
 
 print("* Testing PING...")
-print(c.talk("PING"))
+print(clnt.talk("PING"))
 
 
 print("* Testing GET...")
 for i in range(5):
-    cmd = f"GET {i}"
-    print(f"{cmd}: {c.talk(cmd)}", end="")
+    comand = f"GET {i}"
+    print(f"{comand}: {clnt.talk(comand)}", end="")
 
 
 # Sequence 0 for testing
-seq = c.talk("GET 0")
+seq = clnt.talk("GET 0")
 print()
 print("* Testing INFO...")
-cmd = f"INFO {seq}"
-print(c.talk(cmd))
+comand = f"INFO {seq}"
+print(c.talk(comand))
 
 
 print("* Testing COMP...")
-cmd = f"COMP {seq}"
-print(cmd, end="")
-print(c.talk(cmd))
+comand = f"COMP {seq}"
+print(comand, end="")
+print(clnt.talk(comand))
 
 
 print("* Testing REV...")
-cmd = f"REV {seq}"
-print(cmd, end="")
-print(c.talk(cmd))
+comand = f"REV {seq}"
+print(comand, end="")
+print(clnt.talk(comand))
 
 
 print("* Testing GENE...")
 for gene in ["U5", "ADA", "FRAT1", "FXN", "RNU6_269P"]:
-    cmd = f"GENE {gene}"
-    print(cmd)
-    print(c.talk(cmd))
+    comand = f"GENE {gene}"
+    print(comand)
+    print(clnt.talk(comand))
