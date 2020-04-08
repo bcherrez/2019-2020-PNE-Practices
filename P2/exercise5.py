@@ -20,7 +20,7 @@ print(clnt)
 # -- Read the Gene from a file
 
 s =Seq().read_fasta(DNA_FILE)
-# s =Seq().read_fasta(FOLDER + GENE + EXT)
+
 
 # -- Send the Gene
 clnt.debug_talk(f"Sending {GENE} Gene to the server...")
