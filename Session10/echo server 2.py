@@ -3,21 +3,20 @@ import termcolor
 
 
 PORT = 8080
-IP = "192.168.124.179"
+IP = "192.168.1.105"
 
-# -- Create the socket
-ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # -- Avoid the problem of Port already in use
-ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-# -- Bind the socket to server's IP and PORT
-ls.bind((IP, PORT))
 
-# -- Configure the socket for listening
-ls.listen()
+s.bind((IP, PORT))
 
-num_connections = 0
+
+s.listen()
+
+number_con = 0
 
 print("The server is configured!")
 
@@ -25,26 +24,25 @@ while True:
     print("Waiting for Clients to connect")
 
     try:
-        (cs, client_ip_port) = ls.accept()
+        (client_socket, client_ip_port) = s.accept()
     except KeyboardInterrupt:
         print("Server stopped by the user")
-        ls.close()
+        s.close()
         exit()
 
     else:
 
         # -- New client
-        num_connections += 1
+        number_con += 1
+        print("CONNECTION: ", number_con, "ClientIP, PORT: ",client_ip_port)
 
-        print(f"CONNECTION {num_connections}. Client IP,PORT: {client_ip_port}")
-
-        msg_raw = cs.recv(2048)
-        msg = msg_raw.decode()
+        message_raw = client_socket.recv(2000)
+        message = message_raw.decode()
 
         print("Message received: ", end="")
-        termcolor.cprint(msg, "green")
+        termcolor.cprint(message, "green")
 
-        response = "ECHO: " + msg + "\n"
+        response = "ECHO: " + message + "\n"
 
-        cs.send(response.encode())
-        cs.close()
+        client_socket.send(response.encode())
+        client_socket.close()

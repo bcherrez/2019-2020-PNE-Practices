@@ -2,60 +2,59 @@ import socket
 import termcolor
 
 PORT = 8080
-IP = "192.168.124.179"
+IP = "192.168.1.105"
 
-# -- Create the socket
-ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # -- Avoid the problem of Port already in use
-ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-# -- Bind the socket to server's IP and PORT
-ls.bind((IP, PORT))
 
-# -- Configure the socket for listening
-ls.listen()
+s.bind((IP, PORT))
 
-num_connections = 0
+s.listen()
+
+number_con = 0
 
 # -- List for storing info about clients
 client_list = []
 
 print("The server is configured!")
 
-while num_connections < 5:
+while number_con < 5:
     print("Waiting for Clients to connect")
 
     try:
-        (cs, client_ip_port) = ls.accept()
+        (client_socket, client_ip_port) = s.accept()
 
     except KeyboardInterrupt:
         print("Server stopped by the user")
-        ls.close()
+        s.close()
         exit()
 
     else:
 
-        num_connections += 1
+        number_con += 1
 
-        print(f"CONNECTION {num_connections}. Client IP,PORT: {client_ip_port}")
+        print("CONNECTION: ", number_con, "From the client IP,PORT: ", client_ip_port)
 
         # -- Store the client address in the list
         client_list.append(client_ip_port)
-        msg_raw = cs.recv(2048)
-        msg = msg_raw.decode()
+        message_raw = client_socket.recv(2048)
+        message = message_raw.decode()
 
         print("Message received: ", end="")
-        termcolor.cprint(msg, "green")
+        termcolor.cprint(message, "green")
 
-        response = "ECHO: " + msg + "\n"
+        response = "ECHO: " + message + "\n"
 
-        cs.send(response.encode())
+        client_socket.send(response.encode())
 
-        cs.close()
+        client_socket.close()
 
 print("The following clients has connected to the server: ")
 for i, c in enumerate(client_list):
     print(f"Client {i}: {c}")
 
-ls.close()
+s.close()
