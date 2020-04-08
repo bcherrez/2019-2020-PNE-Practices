@@ -15,4 +15,4 @@ print(clnt)
 
 # -- Send a message to the server
 clnt.debug_talk("First message")
-clnt.debug_talk("Second message")
+clnt.debug_talk("Second message:Testing!!")

@@ -15,5 +15,5 @@ print(clnt)
 
 # -- Send a message to the server
 print("Sending a message to the server...")
-response = clnt.talk("Hi, I am Belén")
+response = clnt.talk("Hi there!")
 print(f"Response: {response}")
