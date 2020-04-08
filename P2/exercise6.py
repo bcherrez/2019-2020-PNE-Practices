@@ -11,14 +11,15 @@ IP = "192.168.1.105"
 PORT = 8080
 
 FOLDER = "../Session04/"
-EXT = ".txt"
 GENE = "FRAT1"
+FILENAME = "FRAT1.txt"
+DNA_FILE = FOLDER + FILENAME
 
 clnt = Client(IP, PORT)
 
 print(clnt)
 
-s = Seq().read_fasta(FOLDER + GENE + EXT)
+s = Seq().read_fasta(DNA_FILE)
 
 # -- Get the gene string
 bases = str(s)
