@@ -11,50 +11,50 @@ def get_resource(path):
     cod = 200
 
     if path == "/":
-        resp = Path("index.html").read_text()
+        response = Path("index.html").read_text()
     elif path == "/info/A":
-        resp = Path("A.html").read_text()
+        response = Path("A.html").read_text()
     elif path == "/info/C":
-        resp = Path("C.html").read_text()
+        response = Path("C.html").read_text()
     elif path == "/info/G":
-        resp = Path("G.html").read_text()
+        response = Path("G.html").read_text()
     elif path == "/info/T":
-        resp = Path("T.html").read_text()
+        response = Path("T.html").read_text()
     else:
-        resp = Path("Error.html").read_text()
+        response = Path("Error.html").read_text()
         cod = 404
 
-    return resp, cod
+    return response, cod
 
 
-def process_client(s):
-    req_raw = s.recv(2000)
-    req = req_raw.decode()
+def process_client(n):
+    request_raw = n.recv(2000)
+    request = request_raw.decode()
 
     print("Message FROM CLIENT: ")
 
-    lines = req.split('\n')
+    lines = request.split('\n')
 
-    req_line = lines[0]
+    request_line = lines[0]
 
     print("Request line: ", end="")
-    termcolor.cprint(req_line, "green")
+    termcolor.cprint(request_line, "green")
 
-    words = req_line.split(' ')
+    words = request_line.split(' ')
 
     method = words[0]
 
     print(f"Method: {method}")
 
 
-    resp_body = ""
+    response_body = ""
 
     code = 0
 
     if method == "GET":
         path = words[1]
         print(f"Path: {path}")
-        resp_body, code = get_resource(path)
+        response_body, code = get_resource(path)
 
     if code == 200:
         status_str = "OK"
@@ -65,20 +65,20 @@ def process_client(s):
 
     header = "Content-Type: text/html\n"
 
-    header += f"Content-Length: {len(resp_body)}\n"
+    header += f"Content-Length: {len(response_body)}\n"
 
-    response_msg = status_line + header + "\r\n" + resp_body
-    cs.send(response_msg.encode())
+    response_message = status_line + header + "\r\n" + response_body
+    client_socket.send(response_message.encode())
 
 
 
-ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-ls.bind((IP, PORT))
+s.bind((IP, PORT))
 
-ls.listen()
+s.listen()
 
 print("SEQ Server configured!")
 
@@ -86,11 +86,11 @@ print("SEQ Server configured!")
 while True:
     print("Waiting for clients....")
     try:
-        (cs, client_ip_port) = ls.accept()
+        (client_socket, client_ip_port) = s.accept()
     except KeyboardInterrupt:
         print("Server Stopped!")
-        ls.close()
+        s.close()
         exit()
     else:
-        process_client(cs)
-        cs.close()
+        process_client(client_socket)
+        client_socket.close()
