@@ -1,3 +1,4 @@
+
 import socket
 import termcolor
 from pathlib import Path
@@ -11,7 +12,7 @@ def process_client(s):
     req_raw = s.recv(2000)
     req = req_raw.decode()
 
-    print("Message FROM CLIENT: ")
+    print("Message from client: hello from web server 4 ")
     lines = req.split('\n')
     req_line = lines[0]
 

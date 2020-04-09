@@ -5,16 +5,16 @@ IP = "127.0.0.1"
 PORT = 8080
 
 
-def process_client(s):
-    req_raw = s.recv(2000)
-    req = req_raw.decode()
+def process_client(n):
+    request_raw = n.recv(2000)
+    request = request_raw.decode()
 
-    print("Message FROM CLIENT: ")
-    lines = req.split('\n')
-    req_line = lines[0]
+    print("Message from client : hello from web server 3 ")
+    lines = request.split('\n')
+    request_line = lines[0]
 
     print("Request line: ", end="")
-    termcolor.cprint(req_line, "green")
+    termcolor.cprint(request_line, "green")
 
     # Generate the response message
 
@@ -43,17 +43,17 @@ def process_client(s):
     header += "Content-Length: 5\n"
 
     #Build the message by joining together all the parts
-    response_msg = status_line + header + "\r\n" + body
-    cs.send(response_msg.encode())
+    response_message = status_line + header + "\r\n" + body
+    client_socket.send(response_message.encode())
 
 
-ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-ls.bind((IP, PORT))
+s.bind((IP, PORT))
 
 
-ls.listen()
+s.listen()
 
 print("SEQ Server configured!")
 
@@ -61,11 +61,11 @@ print("SEQ Server configured!")
 while True:
     print("Waiting for clients....")
     try:
-        (cs, client_ip_port) = ls.accept()
+        (client_socket, client_ip_port) = s.accept()
     except KeyboardInterrupt:
         print("Server Stopped!")
-        ls.close()
+        s.close()
         exit()
     else:
-        process_client(cs)
-        cs.close()
+        process_client(client_socket)
+        client_socket.close()
