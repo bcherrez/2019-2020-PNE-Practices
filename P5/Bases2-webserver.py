@@ -3,8 +3,6 @@ import socketserver
 import termcolor
 from pathlib import Path
 
-
-
 PORT = 8080
 
 socketserver.TCPServer.allow_reuse_address = True
@@ -49,14 +47,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         return
 
 
-
 Handler = TestHandler
 
 # Open the socket
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
 
     print("Serving at PORT", PORT)
-
 
     try:
         httpd.serve_forever()
