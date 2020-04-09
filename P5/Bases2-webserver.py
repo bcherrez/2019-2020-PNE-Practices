@@ -16,9 +16,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         termcolor.cprint(self.requestline, 'green')
 
-        req_line = self.requestline.split(' ')
+        request_line = self.requestline.split(' ')
 
-        path = req_line[1]
+        path = request_line[1]
 
         path = path[1:]
 
