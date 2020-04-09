@@ -10,10 +10,10 @@ socketserver.TCPServer.allow_reuse_address = True
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
-        termcolor.cprint(self.requestline, 'green')
-        req_line = self.requestline.split(' ')
+        termcolor.cprint(self.requestline, 'blue')
+        request_line = self.requestline.split(' ')
         # Get the path. It always start with the / symbol
-        path = req_line[1]
+        path = request_line[1]
         path = path[1:]
 
         # Variable for sending the response back
@@ -23,11 +23,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Content type header
         content_type = 'text/plain'
         if path == "":
-            termcolor.cprint("Main page requested", 'blue')
+            termcolor.cprint("Main page requested", 'red')
             contents = "Welcome to my server"
             status = 200
         else:
-            termcolor.cprint("ERROR: Not found", 'red')
+            termcolor.cprint("ERROR: Not found", 'green')
             contents = "Resource not available"
             # Status code is NOT FOUND
             status = 404
@@ -51,5 +51,5 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
         httpd.serve_forever()
     except KeyboardInterrupt:
         print("")
-        print("Stoped by the user")
+        print("Stopped by the user")
         httpd.server_close()

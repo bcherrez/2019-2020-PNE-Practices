@@ -14,7 +14,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         path = req_line[1]
         path = path[1:]
         # Content type header
-        # Both, the error and the main page are in HTML
+        # Error and the main page are in HTML
         content_type = 'text/html'
 
         if path == "":
