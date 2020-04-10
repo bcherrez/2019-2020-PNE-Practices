@@ -21,7 +21,7 @@ SEQ_GET = [
     "AGCGCAAACGCTAAAAACCGGTTGAGTTGACGCACGGAGAGAAGGGGTGTGTGGGTGGGT",
 ]
 
-FOLDER = "../Session-04/"
+FOLDER = "../Session04/"
 EXT = ".txt"
 
 
@@ -37,10 +37,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         termcolor.cprint(self.requestline, 'green')
 
         # Analize the request line
-        req_line = self.requestline.split(' ')
+        request_line = self.requestline.split(' ')
 
         # Get the path. It always start with the / symbol
-        path = req_line[1]
+        path = request_line[1]
 
         # Read the arguments
         arguments = path.split('?')
@@ -50,13 +50,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         # -- Content type header
         # -- Both, the error and the main page are in HTML
-        contents = Path('Error.html').read_text()
+        contents = Path('error.html').read_text()
         error_code = 404
 
         if verb == "/":
             # Open the form1.html file
             # Read the index from the file
-            contents = Path('form-4.html').read_text()
+            contents = Path('form4.html').read_text()
             error_code = 200
         elif verb == "/ping":
             contents = """
