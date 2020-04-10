@@ -11,18 +11,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         termcolor.cprint(self.requestline, 'green')
-        req_line = self.requestline.split(' ')
-        path = req_line[1]
+        request_line = self.requestline.split(' ')
+        path = request_line[1]
         arguments = path.split('?')
         # Get the verb. It is the first argument
         verb = arguments[0]
-        contents = Path('Error.html').read_text()
+        contents = Path('error.html').read_text()
         error_code = 404
 
         if verb == "/":
             # Open the form1.html file
             # Read the index from the file
-            contents = Path('form-EX01.html').read_text()
+            contents = Path('exercise1-form.html').read_text()
             error_code = 200
         elif verb == "/echo":
             # -- Get the argument to the right of the ? symbol
@@ -59,6 +59,6 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
         httpd.serve_forever()
     except KeyboardInterrupt:
         print("")
-        print("Stoped by the user")
+        print("Stopped by the user")
         httpd.server_close()
 

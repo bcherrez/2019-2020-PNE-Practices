@@ -10,25 +10,25 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         termcolor.cprint(self.requestline, 'green')
-        req_line = self.requestline.split(' ')
-        path = req_line[1]
+        request_line = self.requestline.split(' ')
+        path = request_line[1]
         arguments = path.split('?')
         verb = arguments[0]
-        contents = Path('Error.html').read_text()
+        contents = Path('error.html').read_text()
         error_code = 404
 
         if verb == "/":
-            contents = Path('form-EX02.html').read_text()
+            contents = Path('exercise2-form.html').read_text()
             error_code = 200
         elif verb == "/echo":
             pair = arguments[1]
             pairs = pair.split('&')
             name, value = pairs[0].split("=")
 
-            chk_value = ""
+            check_value = ""
             if len(pairs) > 1:
-                chk, chk_value = pairs[1].split("=")
-                if chk == "chk":
+                check, check_value = pairs[1].split("=")
+                if check == "check":
                     value = value.upper()
 
             # -- Generate the html code
@@ -53,9 +53,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         self.wfile.write(str.encode(contents))
 
         return
-
-
-
 Handler = TestHandler
 
 # -- Open the socket server
@@ -66,5 +63,5 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
         httpd.serve_forever()
     except KeyboardInterrupt:
         print("")
-        print("Stoped by the user")
+        print("Stopped by the user")
         httpd.server_close()
