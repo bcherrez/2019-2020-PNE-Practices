@@ -1,22 +1,21 @@
-
 import http.client
 import json
 import termcolor
 
 PORT = 8080
-SERVER = 'localhost'
+SERVER = '127.0.0.1'
 
-print(f"\nConnecting to server: {SERVER}:{PORT}\n")
+print(f"\nConnecting to server: {SERVER}, {PORT}\n")
 
 
 conn = http.client.HTTPConnection(SERVER, PORT)
 
-#Send the request message, using the GET method. We are
+# Send the request message, using the GET method. We are
 
 try:
     conn.request("GET", "/listusers")
 except ConnectionRefusedError:
-    print("ERROR! Cannot connect to the Server")
+    print("Can not connect to the Server")
     exit()
 
 r1 = conn.getresponse()
@@ -43,13 +42,10 @@ for person in persons:
     termcolor.cprint("Age: ", 'green', end="")
     print(person['age'])
 
-
     phoneNumbers = person['phoneNumber']
-
 
     termcolor.cprint("Phone numbers: ", 'green', end='')
     print(len(phoneNumbers))
-
 
     for i, num in enumerate(phoneNumbers):
         termcolor.cprint("  Phone {}:".format(i), 'blue')
