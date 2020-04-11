@@ -1,4 +1,3 @@
-
 import http.client
 import json
 
@@ -25,10 +24,10 @@ r1 = conn.getresponse()
 
 print(f"Response received!: {r1.status} {r1.reason}\n")
 
-#Response's body
+# Response's body
 data1 = r1.read().decode()
 
-#Variable with the data,
+# Variable with the data,
 
 response = json.loads(data1)
 

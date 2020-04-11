@@ -1,8 +1,8 @@
-
 import http.client
 import json
 import termcolor
 
+# Sequence id endpoint
 GENES = {
     'FRAT1': 'ENSG00000165879',
     'ADA': 'ENSG00000196839',
@@ -16,11 +16,11 @@ GENES = {
     'ANK2': 'ENSG00000145362',
 }
 
-GENENAME = 'MIR633'
+NAME = 'MIR633'
 SERVER = 'rest.ensembl.org'
 ENDPOINT = '/sequence/id/'
 PARAMS = '?content-type=application/json'
-REQ = ENDPOINT + GENES[GENENAME] + PARAMS
+REQ = ENDPOINT + GENES[NAME] + PARAMS
 URL = SERVER + REQ
 
 print()
@@ -34,7 +34,7 @@ try:
     conn.request("GET", REQ)
 
 except ConnectionRefusedError:
-    print("ERROR! Cannot connect to the Server")
+    print("Cannot connect to the Server")
     exit()
 
 
@@ -49,7 +49,7 @@ data1 = r1.read().decode()
 gene = json.loads(data1)
 
 termcolor.cprint("Gene", 'green', end="")
-print(f": {GENENAME}")
+print(f": {NAME}")
 termcolor.cprint("Description", 'green', end="")
 print(f": {gene['desc']}")
 termcolor.cprint("Bases", 'green', end="")

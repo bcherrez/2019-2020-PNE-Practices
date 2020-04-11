@@ -1,4 +1,3 @@
-
 import http.client
 import json
 import termcolor
@@ -26,7 +25,7 @@ PARAMS = '?content-type=application/json'
 
 
 print()
-name = input("Write the gene name: ")
+NAME = input("Write the gene name: ")
 
 REQ = ENDPOINT + GENES[name] + PARAMS
 URL = SERVER + REQ
@@ -55,27 +54,27 @@ print(f"Response received!: {r1.status} {r1.reason}\n")
 data1 = r1.read().decode()
 
 
-gene = json.loads(data1)
+GENE = json.loads(data1)
 
 termcolor.cprint("Gene", 'green', end="")
-print(f": {name}")
+print(f": {NAME}")
 termcolor.cprint("Description", 'green', end="")
-print(f": {gene['desc']}")
+print(f": {GENE['desc']}")
 
-genestr = gene['seq']
+GENE_SEQ = GENE['seq']
 
 # -- Create the object sequence from the string
-s = Seq(genestr)
+s = Seq(GENE_SEQ)
 
-sl = s.len()
+s_length = s.len()
 ca = s.count_base('A')
-pa = "{:.1f}".format(100 * ca / sl)
+pa = "{:.1f}".format(100 * ca / s_length)
 cc = s.count_base('C')
-pc = "{:.1f}".format(100 * cc / sl)
+pc = "{:.1f}".format(100 * cc / s_length)
 cg = s.count_base('G')
-pg = "{:.1f}".format(100 * cg / sl)
+pg = "{:.1f}".format(100 * cg / s_length)
 ct = s.count_base('T')
-pt = "{:.1f}".format(100 * ct / sl)
+pt = "{:.1f}".format(100 * ct / s_length)
 
 termcolor.cprint("Total lengh", 'green', end="")
 print(f": {sl}")
@@ -90,12 +89,12 @@ termcolor.cprint("T", 'blue', end="")
 print(f": {ct} ({pt}%)")
 
 # Dictionary with the values
-d = s.count()
+d_data = s.count()
 
-#Create a list with all the values
-ll = list(d.values())
+# Create a list with all the values
+l_values = list(d.values())
 
-m = max(ll)
+maximum = max(l_values)
 
 termcolor.cprint("Most frequent Base", 'green', end="")
-print(f": {BASES[ll.index(m)]}")
+print(f": {BASES[l_values.index(maximum)]}")

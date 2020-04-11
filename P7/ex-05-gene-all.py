@@ -1,4 +1,3 @@
-
 import http.client
 import json
 import termcolor
@@ -24,19 +23,18 @@ SERVER = 'rest.ensembl.org'
 ENDPOINT = '/sequence/id/'
 PARAMS = '?content-type=application/json'
 
-#List for storing the A percentages
+# List for storing the A percentages
 list_A = []
 
-#Repeat the process for all the genes
-for name in GENES:
+# Repeat the process for all the genes
+for NAME in GENES:
 
-    REQ = ENDPOINT + GENES[name] + PARAMS
+    REQ = ENDPOINT + GENES[NAME] + PARAMS
     URL = SERVER + REQ
 
     print()
     print(f"Server: {SERVER}")
     print(f"URL: {URL}")
-
 
     conn = http.client.HTTPConnection(SERVER)
 
@@ -47,39 +45,36 @@ for name in GENES:
         print("ERROR! Cannot connect to the Server")
         exit()
 
-
     r1 = conn.getresponse()
-
 
     print(f"Response received!: {r1.status} {r1.reason}\n")
 
     data1 = r1.read().decode()
 
-
-    gene = json.loads(data1)
+    GENE = json.loads(data1)
 
     termcolor.cprint("Gene", 'green', end="")
-    print(f": {name}")
+    print(f": {NAME}")
     termcolor.cprint("Description", 'green', end="")
-    print(f": {gene['desc']}")
+    print(f": {GENE['desc']}")
 
-    genestr = gene['seq']
+    GENE_SEQ = GENE['seq']
 
-    #Create the object sequence from the string
-    s = Seq(genestr)
+    # Create the object sequence from the string
+    s = Seq(GENE_SEQ)
 
-    sl = s.len()
+    s_length = s.len()
     ca = s.count_base('A')
-    pa = "{:.1f}".format(100 * ca / sl)
+    pa = "{:.1f}".format(100 * ca / s_length)
     cc = s.count_base('C')
-    pc = "{:.1f}".format(100 * cc / sl)
+    pc = "{:.1f}".format(100 * cc / s_length)
     cg = s.count_base('G')
-    pg = "{:.1f}".format(100 * cg / sl)
+    pg = "{:.1f}".format(100 * cg / s_length)
     ct = s.count_base('T')
-    pt = "{:.1f}".format(100 * ct / sl)
+    pt = "{:.1f}".format(100 * ct / s_length)
 
     termcolor.cprint("Total lengh", 'green', end="")
-    print(f": {sl}")
+    print(f": {s_length}")
 
     termcolor.cprint("A", 'blue', end="")
     print(f": {ca} ({pa}%)")
@@ -90,14 +85,11 @@ for name in GENES:
     termcolor.cprint("T", 'blue', end="")
     print(f": {ct} ({pt}%)")
 
-    d = s.count()
+    d_data = s.count()
 
+    l_values = list(d.values())
 
-    ll = list(d.values())
-
-
-    m = max(ll)
-
+    maximum = max(l_values)
 
     termcolor.cprint("Most frequent Base", 'green', end="")
     print(f": {BASES[ll.index(m)]}")
@@ -105,10 +97,10 @@ for name in GENES:
     # Add the A percentage to the list
     list_A.append(pa)
 
-mpa = max(list_A)
+maximum_pa = max(list_A)
 
 
-i = list_A.index(mpa)
+i = list_A.index(maximum_pa)
 
 genes_list = list(GENES.keys())
 

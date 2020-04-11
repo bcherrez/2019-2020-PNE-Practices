@@ -1,4 +1,3 @@
-
 import termcolor
 
 GENES = {

@@ -28,7 +28,7 @@ def info_comand(strseq):
     """INFO seq
     returns: The string with the information
     """
-    #Create the object sequence from the string
+    # Create the object sequence from the string
     s = Seq(strseq)
     s_length = s.len()
     count_a = s.count_a('A')
@@ -90,17 +90,17 @@ while True:
         req_raw = client_socket.recv(2000)
         req = req_raw.decode()
 
-        #Process the command
+        # Process the command
         lines = req.split("\n")
         line0 = lines[0].strip()
 
-        #Separate the line into command an argument
+        # Separate the line into command an argument
         line_comands = line0.split(' ')
 
-        #First element is the command
+        # First element is the command
         comand = line_comands[0]
 
-        #Get the first argument
+        # Get the first argument
         try:
             argument = line_comands[1]
         except IndexError:
