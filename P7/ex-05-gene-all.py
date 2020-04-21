@@ -87,12 +87,12 @@ for NAME in GENES:
 
     d_data = s.count()
 
-    l_values = list(d.values())
+    l_values = list(d_data.values())
 
     maximum = max(l_values)
 
     termcolor.cprint("Most frequent Base", 'green', end="")
-    print(f": {BASES[ll.index(m)]}")
+    print(f": {BASES[l_values.index(maximum)]}")
 
     # Add the A percentage to the list
     list_A.append(pa)

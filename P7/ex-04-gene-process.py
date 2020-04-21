@@ -27,7 +27,7 @@ PARAMS = '?content-type=application/json'
 print()
 NAME = input("Write the gene name: ")
 
-REQ = ENDPOINT + GENES[name] + PARAMS
+REQ = ENDPOINT + GENES[NAME] + PARAMS
 URL = SERVER + REQ
 
 print()
@@ -77,7 +77,7 @@ ct = s.count_base('T')
 pt = "{:.1f}".format(100 * ct / s_length)
 
 termcolor.cprint("Total lengh", 'green', end="")
-print(f": {sl}")
+print(f": {s_length}")
 
 termcolor.cprint("A", 'blue', end="")
 print(f": {ca} ({pa}%)")
@@ -92,7 +92,7 @@ print(f": {ct} ({pt}%)")
 d_data = s.count()
 
 # Create a list with all the values
-l_values = list(d.values())
+l_values = list(d_data.values())
 
 maximum = max(l_values)
 
