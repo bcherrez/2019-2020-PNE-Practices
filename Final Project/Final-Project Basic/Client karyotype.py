@@ -1,9 +1,6 @@
 
 # http://rest.ensembl.org/info/assembly/homo_sapiens?content-type=application/json
-
-
 import http.client
-import http.server
 import json
 
 SERVER = 'rest.ensembl.org'
@@ -36,7 +33,7 @@ specie=input("Select the specie ")
 
 if specie == "Human":
      print("The name of the chromosomes are :")
-     for chromosomes in ensembl_data['karyotype']:
-        print(chromosomes)
+     for chromosome in ensembl_data['karyotype']:
+        print(chromosome)
 else:
     print("Error html")
