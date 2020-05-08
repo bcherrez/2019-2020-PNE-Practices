@@ -224,3 +224,66 @@ http://127.0.0.1:8080/geneInfo?gene=
 <a href="/">Main Page</a>
 </body>
 </html>
+
+
+--------------------------------> geneList endpoint
+
+
+* TEST 1:
+
+* Input:
+http://localhost:8080/geneList?chromo=1&start=0&end=30000
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CHROMOSOME LENGTH</title>
+</head>
+<body style="background-color: yellow;">
+<h2>The genes in the chromosome 1 that start at 0 and end at 30000 are:</h2> <p>DDX11L1</p>
+<p>WASH7P</p><p>MIR6859-1</p><p>MIR1302-2HG</p><a href="/">Main page</a>
+</body>
+</html>
+
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/geneList?chromo=3&start=0&end=30000
+
+* Output:
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CHROMOSOME LENGTH</title>
+</head>
+<body style="background-color: yellow;">
+<h2>The genes in the chromosome 3 that start at 0 and end at 30000 are:</h2> <p>LINC01986</p><a href="/">Main page</a>
+</body>
+</html>
+
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/geneList?chromo=chromo&start=0&end=30000
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>

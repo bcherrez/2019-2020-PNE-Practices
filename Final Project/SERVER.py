@@ -18,11 +18,12 @@ socketserver.TCPServer.allow_reuse_address = True
 
 
 limit_value = " "
-
+values_for_params=[]
 
 # Class with our Handler. It is a called derived from BaseHTTPRequestHandler
 # It means that our class inheritates all his methods and properties
 # Print the request line
+
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -34,7 +35,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         resource = arguments[0]
         self.send_response(404)
         # to avoid error: local _variable may be referenced before assignment
-        global PARAMS, limit_value
+        global PARAMS, limit_value, values_for_params
 
         try:
             if resource == "/":
@@ -74,24 +75,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             if count < int(limit_value[1]):
                                 list_species.append(item['common_name'])
                                 count += 1
-                contents = """
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                <title>LIST OF SPECIES IN THE BROWSER</title>
-                <meta charset="utf-8">
-                </head>
-                <body style="background-color: orange;">
-                """
+                contents = Path("list species.html").read_text()
                 contents += f"<p>The total number of species is :{len(species)}</p>"
-
                 if not limit_value[1] == '':
                     contents += f"<p>The limit you have selected is: {limit_value[-1]}</p>"
                 contents += f"<p>The name of the species are: "
                 for item in list_species:
                     contents+=f"<p>-{item}</p>"
-                contents += '<a href="/">Main Page</a>'
-                contents += "</body></html>"
 
             elif resource == '/karyotype':
                 new_arg = arguments
@@ -112,20 +102,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 for item in ensembl_data['karyotype']:
                     karyotype_list.append(item)
 
-                contents = """
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="utf-8">
-                            <title>KARYOTYPE</title>
-                        </head>
-                        <body style="background-color: lightgreen;">
-                        """
+                contents = Path("karyotype.html").read_text()
                 contents += f"<h2> The karyotype of the specie {specie_name[-1]} is: </h2>"
                 for chromosomes in karyotype_list:
                     contents += f"<p>{chromosomes}</p>"
-                contents += '<a href="/">Main page</a>'
-                contents += "</body></html>"
                 self.send_response(200)
             elif resource == "/chromosomeLength":
                 new_argument = arguments[1]
@@ -143,49 +123,29 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 for item in ensembl_data['top_level_region']:
                     if item['name'] == chromosome:
                         chromosome_length = str(item['length'])
-                contents = """
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                    <meta charset="utf-8">
-                    <title>CHROMOSOME LENGTH</title>
-                    </head>
-                    <body style="background-color: pink;">
-                    """
+                contents= Path("chromosome length.html").read_text()
                 contents += f"<p>The length of the {specie_n[0]} chromosome {chromo_n[-1]} is: {chromosome_length}</p>"
-                contents += '<a href="/">Main page</a>'
-                contents += "</body></html>"
                 self.send_response(200)
             elif resource == "/geneList":
                 endpoint = '/overlap/region/human/'
                 new_argument = arguments[1]
                 sequence_argument = new_argument.split("&")
 
-                contents = """
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="utf-8">
-                        <title>CHROMOSOME LENGTH</title>
-                    </head>
-                    <body style="background-color: yellow;">
-                    """
+                contents = Path("gene list.html").read_text()
                 for i in sequence_argument:
                     i = i.split('=')
                     values_for_params.append(i[-1])
                 PARAMS = values_for_params[0] + ':' + values_for_params[1] + '-' + values_for_params[
                     2] + "?feature=gene;content-type=application/json"
                 conn.request("GET", endpoint + PARAMS)
-                response_1 = conn.getresponse()
-                data_1 = response_1.read().decode("utf-8")
-                ensembl_gene = json.loads(data_1)
+                response_g = conn.getresponse()
+                data_g = response_g.read().decode("utf-8")
+                ensembl_gene = json.loads(data_g)
                 contents += f"<h2>The genes in the chromosome {values_for_params[0]} that start at {values_for_params[1]} and end at {values_for_params[2]} are:</h2> "
                 gene_list = []
                 for item in ensembl_gene:
                     contents += f"<p>{item['external_name']}</p>"
                     gene_list.append(item['external_name'])
-                contents += '<a href="/">Main page</a>'
-                contents += "</body></html>"
                 self.send_response(200)
             else:
                     endpoint_1 = '/xrefs/symbol/homo_sapiens/'
@@ -206,28 +166,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     response_2 = conn.getresponse()
                     data_2 = response_2.read().decode("utf-8")
                     ensembl_data = json.loads(data_2)
-                    contents = """
-                    <!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="utf-8">
-                        <title>GENE</title>
-                    </head>
-                    <body style="background-color: lightblue;">
-                    """
+                    contents = Path("human gene.html").read_text()
                     if resource == "/geneSeq":
                         gene_seq = ''
                         gene_seq += ensembl_data['seq']
                         contents += f"<h2>The sequence of the gene {gene_name} is : </h2>"
                         contents += f"<textarea readonly rows = 20 cols = 90>{gene_seq}</textarea>"
-                        contents += '<a href="/">Main page</a>'
-                        contents += "</body></html>"
                     if resource == '/geneInfo':
                         endpoint_3 = '/lookup/id/'
                         params_3 = gene_id + PARAMS
                         conn.request("GET", endpoint_3 + params_3)
-                        response = conn.getresponse()
-                        data = response.read().decode("utf-8")
+                        response_3 = conn.getresponse()
+                        data = response_3.read().decode("utf-8")
                         ensembl_seq = json.loads(data)
                         sequence = Seq(ensembl_data['seq'])
                         contents += f"<h2>Information about the gene: {gene_name}</h2>"
@@ -236,8 +186,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         contents += f"<p>Length: {sequence.len()}</p>"
                         contents += f"<p>In chromosome: {ensembl_seq['seq_region_name']}</p>"
                         contents += f"<p>ID: {gene_id}</p>"
-                        contents += '<a href="/">Main page</a>'
-                        contents += "</body></html>"
                     if resource == "/geneCalc":
                         sequence = Seq(ensembl_data['seq'])
                         contents += f"<h2>Calculations of the gene: {gene_name}</h2>"
@@ -280,3 +228,6 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
         print("Stopped by the user")
         httpd.server_close()
 
+# GENE_LIST( no va en ninguno)
+#limit mayor species
+# en length si chromo not in specie error evitar blanco
