@@ -1,6 +1,7 @@
 import http.server
 import http.client
 import socketserver
+from typing import List
 import termcolor
 from pathlib import Path
 from Seq1 import Seq
@@ -19,19 +20,18 @@ socketserver.TCPServer.allow_reuse_address = True
 # Class with our Handler. It is a called derived from BaseHTTPRequestHandler
 # It means that our class inheritates all his methods and properties
 limit_value = " "
-params_n = []
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         """This method is called whenever the client invokes the GET method in the HTTP protocol request"""
-        global limit_value, params_n
         termcolor.cprint(self.requestline, 'green')
         request_line = self.requestline.split(' ')
         arguments = (request_line[1]).split("?")
         resource = arguments[0]
         error_code = 404
+        global limit_value
 
         try:
             if resource == "/":
@@ -116,22 +116,25 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = response.read().decode("utf-8")
                 ensembl_data = json.loads(data)
                 chromosome_length = ''
-                for item in ensembl_data['top_level_region']:
-                    if item['name'] == chromosome:
-                        chromosome_length = str(item['length'])
+                for item in ensembl_data['top level region']:
+                    chromosome = item['name']
+                    for element in chromosome:
+                        chromosome_length = str(element['length'])
                 contents = Path("chromosome length.html").read_text()
-                contents += f"<p>The length of the {specie_n[0]} chromosome {chromo_n[-1]} is: {chromosome_length}</p>"
+                contents += f"<p>The length of the {specie_n[0]} chromosome {chromosome} is: {chromosome_length}</p>"
                 self.send_response(200)
             elif resource == "/geneList":
                 new_argument = arguments[1]
                 seq_argument = new_argument.split("&")
-
                 params_n = []
 
                 for e in seq_argument:
                     e = e.split('=')
                     params_n.append(e[-1])
                 endpoint = "/overlap/region/human/"
+                # ?content-type=application/json;feature=gene;feature=transcript;feature=cds;feature=exon
+                # "?feature=gene;content-type=application/json"
+                #  "?content-type=application/json;feature=gene"
                 params = params_n[0] + ":" + params_n[1] + "-" + params_n[
                     2] + "?feature=gene;content-type=application/json"
                 conn.request("GET", endpoint + params)
@@ -153,7 +156,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 new_argument = arguments[1]
                 sequence_arguments = new_argument.split("=")
                 gene_name = sequence_arguments[1]
-
                 endpoint_1 = '/xrefs/symbol/homo_sapiens/'
                 params_1 = gene_name + PARAMS
                 conn.request("GET", endpoint_1 + params_1)
