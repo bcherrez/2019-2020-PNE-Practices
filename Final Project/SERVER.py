@@ -19,14 +19,13 @@ socketserver.TCPServer.allow_reuse_address = True
 # Class with our Handler. It is a called derived from BaseHTTPRequestHandler
 # It means that our class inheritates all his methods and properties
 limit_value = " "
-params_n = []
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         """This method is called whenever the client invokes the GET method in the HTTP protocol request"""
-        global limit_value, params_n
+        global limit_value
         termcolor.cprint(self.requestline, 'green')
         request_line = self.requestline.split(' ')
         arguments = (request_line[1]).split("?")
@@ -125,7 +124,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             elif resource == "/geneList":
                 new_argument = arguments[1]
                 seq_argument = new_argument.split("&")
-
                 params_n = []
 
                 for e in seq_argument:
