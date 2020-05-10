@@ -15,8 +15,6 @@ bases = ['A', 'C', 'T', 'G']
 
 # -- This is for preventing the error: "Port already in use"
 socketserver.TCPServer.allow_reuse_address = True
-# -- This is for preventing the error:"Limit_value referenced before assignment"
-limit_value = " "
 
 
 # Class with our Handler. It is a called derived from BaseHTTPRequestHandler
@@ -27,7 +25,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         """This method is called whenever the client invokes the GET method in the HTTP protocol request"""
-        global limit_value
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
         # Analize the request line
@@ -58,7 +55,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     for item in species:
                         list_species.append(item['common_name'])
                 else:
-                    count =0
+                    count = 0
                     for item in species:
                         if count < int(limit_value[1]):
                             list_species.append(item['common_name'])
