@@ -1,4 +1,490 @@
-Test report
+
+Final Project Basic Report
+====================
+
+----------------------------------> listSpecies endpoint
+* TEST 1:
+
+* Input:
+http://127.0.0.1:8080/listSpecies?limit=10
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIST OF SPECIES IN THE BROWSER</title>
+</head>
+<body style="background-color: orange;">
+<body>
+   The total number of species in the ensembl is : 286 <br>
+   The limit you have selected is : 10 <br>
+   The names of the species are : <ul><li>pig</li><li>American pika</li></ul>
+   <li>African Ostrich</li><li>Nile Tilapia</li><li>channel catfish</li>
+   <li>West African mud turtle</li><li>channel bull blenny</li><li>Sooty mangabey</li>
+   <li>bottlenosed dolphin</li><li>naked mole-rat</li>
+   <a href="/">Main Page</a>
+</body>
+</html>
+
+
+* TEST 2:
+
+* Input:
+http://127.0.0.1:8080/listSpecies?limit=hola
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+* TEST 3:
+
+* Input:
+http://127.0.0.1:8080/listSpecies?limit=3456
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+
+-----------------------------------> karyotype endpoint
+
+TEST 1:
+
+* Input:
+http://127.0.0.1:8080/karyotype?specie=human
+
+* Output:
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="utf-8">
+ <title>KARYOTYPE</title>
+ </head>
+ <body style="background-color: lightgreen;">
+ <h2> The karyotype of the specie human is: </h2>
+ <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p><p>11</p><p>12</p>
+ <p>13</p><p>14</p><p>15</p><p>16</p><p>17</p><p>18</p><p>19</p><p>20</p><p>21</p><p>22</p>
+ <p>X</p><p>Y</p>
+ <a href="/">Main Page</a>
+
+TEST 2 :
+
+* Input:
+http://127.0.0.1:8080/karyotype?specie=zebrafish
+
+* Output:
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="utf-8">
+ <title>KARYOTYPE</title>
+ </head>
+ <body style="background-color: lightgreen;">
+ <h2> The karyotype of the specie human is: </h2>
+ <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p><p>11</p><p>12</p><p>13</p>
+ <p>14</p><p>15</p><p>16</p><p>17</p><p>18</p><p>19</p><p>20</p><p>21</p><p>22</p>23</p>24</p><p>25</p>
+ <p>MT</p>
+ <a href="/">Main Page</a>
+
+
+TEST 3 :
+
+* Input:
+http://127.0.0.1:8080/karyotype?specie=covid-19
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+
+--------------------------------> chromosomeLength endpoint
+
+TEST 1:
+
+* Input:
+http://127.0.0.1:8080/chromosomeLength?specie=mouse&chromo=18
+
+*Output:
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+<meta charset="utf-8">
+<title>CHROMOSOME LENGTH</title>
+</head>
+<p>The length of the mouse chromosome 18 is: 90702639 </p>
+<body style="background-color: pink;">
+
+TEST 2:
+* Input:
+http://127.0.0.1:8080/chromosomeLength?specie=pig&chromo=1
+
+*Output:
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+<meta charset="utf-8">
+<title>CHROMOSOME LENGTH</title>
+</head>
+<p>The length of the pig chromosome 1 is: 274330532 </p>
+<body style="background-color: pink;">
+
+
+TEST 3 :
+* Input:
+http://127.0.0.1:8080/chromosomeLength?specie=plant&chromo=18
+
+*Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+
+
+Final Project Medium Report
+====================
+
+----------------------------------> geneSeq endpoint
+* TEST 1:
+
+* Input:
+http://127.0.0.1:8080/geneSeq?gene=FRAT1
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+<meta charset="utf-8">
+<title>GENE</title>
+</head>
+<body style="background-color: lightblue;">
+<h2>The sequence of the gene FRAT1 is : </h2>"
+<textarea readonly rows = 20 cols = 90>
+CGGCTCCCGCGGCTGCAGGCGCGCGGCTAGAGTGCCTGGCGGGCTCCGGCTTCCGCGTCCGCCCCGGCCCCGGTCCAGACTTAGTCTTCA
+GCTCCGCGCCCGCTCCGCCGCGGCCCACCGCGCCCGCCGGCAGCCGAGCCCCCAGCGACGCCCGCACAGCTCCGGGTGCCCAGACAGGGG
+GCCATGCCGTGCCGGAGGGAGGAGGAAGAGGAAGCCGGCGAGGAGGCGGAGGGGGAGGAAGAGGAGGAGGACAGCTTCCTCCTACTGCAG
+CAGTCAGTGGCGCTGGGCAGCTCGGGCGAGGTGGACCGGCTGGTGGCCCAGATCGGCGAGACGCTGCAGCTGGACGCGGCGCAGCACAGC
+CCGGCCTCGCCGTGCGGGCCCCCGGGGGCGCCGCTGCGGGCCCCGGGGCCCCTGGCTGCGGCGGTGCCGGCGGACAAGGCCAGGTCCCCG
+GCGGTGCCGCTGCTGCTGCCGCCCGCGTTGGCGGAGACTGTGGGCCCGGCGCCCCCTGGGGTCCTGCGCTGCGCCCTGGGGGACCGCGGC
+CGCGTGCGGGGCCGCGCTGCGCCCTACTGCGTGGCCGAGCTCGCCACAGGCCCCAGCGCGCTGTCCCCACTGCCCCCTCAGGCCGACCTT
+GATGGGCCTCCGGGAGCTGGCAAGCAGGGCATCCCGCAGCCGCTGTCGGGTCCGTGCCGGCGAGGATGGCTCCGGGGCGCCGCCGCCTCC
+CGCCGCCTGCAGCAGCGACGCGGGTCCCAACCAGAAACCCGCACAGGCGACGACGACCCGCACCGGCTTCTGCAGCAGCTAGTGCTCTCT
+GGAAACCTCATCAAGGAGGCCGTGCGAAGGCTTCATTCGCGACGGCTGCAGTTACGTGCAAAGCTTCCCCAACGCCCGCTCCTGGGACCT
+CTGTCGGCCCCGGTGCATGAACCCCCTTCGCCTCGCAGCCCTCGCGCGGCCTGCAGTGACCCTGGCGCCTCCGGGAGGGCGCAGCTCAGA
+ACTGGCGACGGCGTTCTTGTGCCTGGCAGCTAACACGCCCGGGGTGGCCACAGCGCCAGCCTCAGACTGGAGGGCAAGGGGTTCCCTTGA
+GGGCTGCAGTTCTACTCAGGCTGGTGGAGAACTCTGGCTTTTGGAAGCGAGAGTAAAAAGCTAATGACGAGGAACCGAAAAATCGCGAGT
+GTTTCGCGGGTAACTGGGGTTGAGGGCCAAAATATTTGGAATGAAGGACTTTGGCCCTATTTAAGGCAGATTTTACAGAGCGCACCTCAA
+ACGTACAAGTCAGTAGGACTCCTTATTTGGCGTGACCCGACCTGGCCGCGGAGCCTGCATTTCCTCGCAGCCTCTCAGTGCCCTCCAGCC
+CCGCGACCATGTGGCCACAATCCACGCTTCTCCGGATCGCGGTGCGCCGGAACCACGGAGGATGATGCCAGTTACTTGCTTTACCTTTTC
+AGGGCTGGCTCCTGATCCACTTTGGGGGAGGAGAACATGAGTAGATAATTTCAGGGTGCAGCCCAATCTGCCAGACTTAAAAAAACCATC
+TTGTGTCTTTGGAGGTGCTGCTTAATACCAAACATGCGGTGCCATGAAGGGACCCTTTGGGGGTTGAATAGGAGTTAACCCCTGCGCTCT
+CTTTGCAACTGTCTCTCTTCTCAGAGTGGTGGGGGAAGGCTGTACGACACGGGTGGGGAAAGGAGGTGGGGGCGGGGAGTATTGAATGGT
+GGTGGAAGGGTAGAGAGGCGCGGAGTGAACCCCACGCCCTGTCTAAAGTGTATTTTCAGAGCCGGCCCGCCTCTCCTCGGTTCAAGGTCA
+CTGTTTCCTGGGCACGCACTGGGTTGCGGGACAGAGTAGCCAGGTTCTGCCGGTGCTCGGAGAAGAGCGCAGTGTTTTGCAAGTGCTGGA
+GTCTCCTGAGGACACGCGCGTCGCCGCCACCGCGGGTGTGGGAAAGCGCGGACGTGCTGGGCGGCTGTGCTTCGGTAGGCGACCACCGCC
+CCTGGCCGCGCTCCGGGCTTTCACGGAAACTCCCGAGACCGGGCCCTGGGTTCCTCCTCTCCTACTCGGCTCTGCAGTCCTACTCAAGCG
+GGTGGCTCTGGGATCCTGGGGGCCTGGGTTGGGGGCTAGGGAGACGCCATGTGATGGACACTCCAGGGACACACAGCCTAGCACAGCAGC
+TTATAATGGGCTCTCCGGGGCCATTTGCAATAACAGCTGCAATTCCCTGGATAGACGAGTTGATTTCCTCCCTCTGCCCCTCCCCCAGCC
+ATGCCAGCTGGCCTTTGTAAGTGCAGGAAACCGAGTAGAAAATGTGACCCTCCAAATGGAGAAGCTGCAGGCTTTGCCATTGTGAACCAT
+GGTGAAGTGCTTGGAACATACTGTTCACTCACTCTAAAGGCGCTGAGACTGTGCTGTTGTTCTCGTTTTTATAGTCAATGGCTTGTTCAT
+CATCCAGATGTGGCTACTGACATATCTACACTTCGCACCGGAGTGTCTGGAATTGTGGCTATCCTGATTATAGGATTTTAACTTAACTGA
+AATGCCTGCTTTGAATAAATGTGTTGGGTTTTTTGTTTGGTTTTATTTTATACTTGCCATCAGTGAAAAAGATGTACAGAACACATTTCT
+CTGATCTCCATAAACATGAAAACACTTGAAATCTC
+</textarea>"
+<a href="/">Main page</a>
+</body></html>"
+
+
+
+* TEST 2:
+
+* Input:
+http://127.0.0.1:8080/geneSeq?gene=U5
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+
+
+----------------------------------> geneInfo endpoint
+
+
+* TEST 1:
+
+* Input:
+http://127.0.0.1:8080/geneInfo?gene=FXN
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+<meta charset="utf-8">
+<title>GENE</title>
+</head>
+<body style="background-color: lightblue;">
+<h2> Information about the gene: FXN </h2>
+<p> Start: 69035747  </p>
+<p>End: 69255187</p>
+<p>Length: 219441</p>
+<p>In chromosome : 9 </p>
+<p>ID: ENSG00000285130</p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+ TEST 2 :
+
+* Input:
+http://127.0.0.1:8080/geneInfo?gene=FGFR3
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+<meta charset="utf-8">
+<title>GENE</title>
+</head>
+<body style="background-color: lightblue;">
+<h2> Information about the gene: FGFR3 </h2>
+<p> Start: 1793293 1793293 </p>
+<p>End: 1808872</p>
+<p>Length: 15580</p>
+<p>In chromosome :4 </p>
+<p>ID:ENSG00000068078</p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+TEST 3 :
+
+* Input:
+http://127.0.0.1:8080/geneInfo?gene=all gene
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+----------------------------------> geneCalc endpoint
+
+TEST 1 :
+
+* Input:
+http://127.0.0.1:8080/geneInfo?gene=MIR633
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+<meta charset="utf-8">
+<title>GENE</title>
+</head>
+<body style="background-color: lightblue;">
+ </h2>Calculations of the gene: MIR633 </h2>
+ <p>Length: 98</p>
+ <p>A : 32 (32.653%)</p>
+ <p>C : 17 (17.347%)</p>
+ <p>T : 33 (33.673%)</p>
+ <p>G : 16 (16.327%)</p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+TEST 2 :
+
+* Input:
+http://127.0.0.1:8080/geneInfo?gene=RNU6_269P
+
+* output:
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+<meta charset="utf-8">
+<title>GENE</title>
+</head>
+<body style="background-color: lightblue;">
+ </h2>Calculations of the gene: RNU6_269P </h2>
+ <p>Length: 97</p>
+ <p>A : 31 (31.959%)</p>
+ <p>C : 17 (17.526%)</p>
+ <p>T : 29 (29.897%)</p>
+ <p>G : 20 (20.619%)</p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+TEST 3 :
+
+* Input:
+http://127.0.0.1:8080/geneInfo?gene=
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+
+--------------------------------> geneList endpoint
+
+
+* TEST 1:
+
+* Input:
+http://localhost:8080/geneList?chromo=3&start=0&end=30000
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GENE IN CHROMO </title>
+</head>
+<body style="background-color: yellow;">
+<h2>The genes in the chromosome 1 starting at 0 and ending at 30000 are:</h2> <p>LINC01986</p>
+<a href="/">Main page</a>
+</body>
+</html>
+
+* TEST 2:
+
+* Input:
+http://localhost:8080/geneList?chromo=1&start=0&end=30000
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GENE IN CHROMO </title>
+</head>
+<body style="background-color: yellow;">
+<h2>The genes in the chromosome 1 starting at 0 and ending at 30000 are:</h2> <p>DDX11L1</p>
+<p>WASH7P</p><p>MIR6859-1</p><p>MIR1302-2HG</p>
+<a href="/">Main page</a>
+</body>
+</html>
+
+
+* TEST 3:
+
+* Input:
+http://localhost:8080/geneList?chromo=33&start=0&end=30000
+
+* Output:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DATA ERROR</title>
+</head>
+<body style="background-color: red;">
+<h1>ERROR</h1>
+<p>Welcome to the DATA ERROR service.</p>
+<p>If you are here the data you have entered does not exist in the ensembl.</p>
+<p>Sorry</p>
+<p></p>
+<a href="/">Main Page</a>
+</body>
+</html>
+
+Final Project Advanced Report
 ====================
 
 -----------------------------------> listSpecies ENDPOINT
