@@ -25,11 +25,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         """This method is called whenever the client invokes the GET method in the HTTP protocol request"""
-        # Print the request line
+        # ----------------- Print the request line
         termcolor.cprint(self.requestline, 'green')
-        # Analize the request line
+        # ---------------- Analize the request line
         request_line = self.requestline.split(' ')
-        # Generating the response message
+        # --------- Generating the response message
         arguments = (request_line[1]).split("?")
         resource = arguments[0]
         error_code = 404
@@ -38,26 +38,35 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             if resource == "/":
                 contents = Path('Main page.html').read_text()
                 self.send_response(200)
+            # ----------------------------------BASIC LEVEL SERVICES ------------------------------------#
             elif resource == '/listSpecies':
+                # ---- Create specific variables of the request line
                 new_argument = arguments
                 limit = new_argument[1]
                 limit_value = limit.split("=")
                 list_species = []
+                # ---- Connect to the ensembl to get the info in json
+                # ---- Read the response message from the server
+                # ---- Read the response's body
+                # ---- Create a variable with the species data from the JSON received
                 endpoint = '/info/species'
                 conn.request("GET", endpoint + PARAMS)
                 response = conn.getresponse()
                 data = response.read().decode("utf-8")
                 ensembl_data = json.loads(data)
                 species = ensembl_data['species']
+                # ----------- If no limit is selected , return all species
                 if limit_value[1] == '':
                     for item in species:
                         list_species.append(item['common_name'])
+                # --------- Iterate through the info and return list with the selected number of species
                 else:
                     count = 0
                     for item in species:
                         if count < int(limit_value[1]):
                             list_species.append(item['common_name'])
                             count += 1
+                # ----------------- Response in json , json.dumps creates it
                 if 'json=1' in request_line[1]:
                     if limit_value[1] == '':
                         json_data ={'ListSpecies': list_species}
@@ -67,16 +76,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         json_data = {'ListSpecies': {'Limit': limit_value[0], 'Species': list_species}}
                         contents = json.dumps(json_data)
                         self.send_response(200)
+                # -----------------------Response in html
                 else:
                     contents = Path("list species.html").read_text()
                     contents += f"<p>The total number of species is :{len(species)}</p>"
                     if not limit_value[1] == '':
                         contents += f"<p>The limit you have selected is: {limit_value[-1]}</p>"
                     contents += f"<p>The name of the species are: "
+                    # --------- Add species to the list
                     for item in list_species:
                         contents += f"<p>-{item}</p>"
                     self.send_response(200)
             elif resource == '/karyotype':
+                # ---- Create specific variables of the request line
                 new_argument = arguments
                 specie = new_argument[1]
                 specie_name = specie.split("=")
@@ -85,6 +97,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     specie_argument = specie_argument[0]
                 else:
                     specie_argument = specie_name[-1]
+                # ---- Connect to the ensembl to get the info in json
+                # ---- Read the response message from the server
+                # ---- Read the response's body
+                # ---- Create a variable with the species data from the JSON received
                 endpoint = '/info/assembly/'
                 params = specie_argument + PARAMS
                 conn.request("GET", endpoint + params)
@@ -92,11 +108,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = response.read().decode("utf-8")
                 ensembl_data = json.loads(data)
                 karyotype_list = []
+                # --------- Iterate through the info and return list with the karyotype of the selected specie
                 for item in ensembl_data['karyotype']:
                     karyotype_list.append(item)
+                # ----------------- Response in json , json.dumps creates it
                 if 'json=1' in request_line[1]:
                     json_data = {'species': {specie_argument: {'chromosomes': karyotype_list}}}
                     contents = json.dumps(json_data)
+                # ------------------Response in html
                 else:
                     contents = Path("karyotype.html").read_text()
                     contents += f"<h2> The karyotype of the specie {specie_name[-1]} is: </h2>"
@@ -105,10 +124,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_response(200)
 
             elif resource == "/chromosomeLength":
+                # ---- Create specific variables of the request line
                 new_argument = arguments[1]
                 chromo_n = new_argument.split("=")
                 specie_n = chromo_n[1].split("&")
                 chromosome = chromo_n[-1]
+                # ---- Connect to the ensembl to get the info in json
+                # ---- Read the response message from the server
+                # ---- Read the response's body
+                # ---- Create a variable with the species data from the JSON received
                 endpoint = '/info/assembly/'
                 params = specie_n[0] + PARAMS
                 conn.request("GET", endpoint + params)
@@ -116,26 +140,35 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data = response.read().decode("utf-8")
                 ensembl_data = json.loads(data)
                 chromosome_length = ''
+                # --------- Iterate through the info and return length of selected chromosome in a specie
                 for item in ensembl_data['top_level_region']:
                     if item['name'] == chromosome:
                         chromosome_length = str(item['length'])
+                # ----------------- Response in json , json.dumps creates it
                 if 'json=1' in request_line[1]:
                     json_data = {'species': {specie_n[0]: {
                         'Chromosome': {chromosome: {'The length of the chromosome is:': chromosome_length}}}}}
                     contents = json.dumps(json_data)
+                # ----------------- Response in html
                 else:
                     contents = Path("chromosome length.html").read_text()
                     contents += f"<p>The length of the {specie_n[0]} chromosome {chromo_n[-1]} is: {chromosome_length}</p>"
                 self.send_response(200)
 
+            # ------------------------------------MEDIUM LEVEL SERVICES ---------------------------------------------- #
             elif resource == "/geneList":
+                # ---- Create specific variables of the request line
                 new_argument = arguments[1]
                 seq_argument = new_argument.split("&")
                 params_n = []
+                # ---- Define the chromosome , start and end in the request line
                 for e in seq_argument:
                     e = e.split('=')
                     params_n.append(e[-1])
-
+                # ---- Connect to the ensembl to get the info in json
+                # ---- Read the response message from the server
+                # ---- Read the response's body
+                # ---- Create a variable with the species data from the JSON received
                 endpoint = "/overlap/region/human/"
                 params = params_n[0] + ":" + params_n[1] + "-" + params_n[
                     2] + "?feature=gene;content-type=application/json"
@@ -144,12 +177,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 data_g = response_g.read().decode("utf-8")
                 gene_d = json.loads(data_g)
                 gene_list = []
+                # --------- Add the corresponding genes to the list
                 for element in gene_d:
                     gene_list.append(element['external_name'])
                 contents = Path("gene list.html").read_text()
                 contents += f"<h2>The genes in the chromosome {params_n[0]} starting at {params_n[1]} and ending at {params_n[2]} are:</h2>"
+                # --------- Iterate through the info and return the genes in the selected location
                 for genes in gene_list:
                     contents += f"<p>{genes}</p>"
+                # ----------------- Response in json , json.dumps creates it
                 if 'json=1' in request_line[1]:
                     json_data = {'Chromosome': params_n[0], 'Start': params_n[1],
                                  'End': params_n[2], 'Genes': gene_list}
@@ -157,6 +193,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_response(200)
 
             else:
+                # ---- Create specific variables of the request line
                 new_argument = arguments[1]
                 sequence_arguments = new_argument.split("=")
                 gene_name = sequence_arguments[1]
@@ -164,6 +201,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     arguments_json = sequence_arguments[1].split('&')
                     gene_name = arguments_json[0]
 
+                # ---- Read the response message from the server
+                # ---- Read the response's body
+                # ---- Create a variable with the species data from the JSON received
                 endpoint_1 = '/xrefs/symbol/homo_sapiens/'
                 params_1 = gene_name + PARAMS
                 conn.request("GET", endpoint_1 + params_1)
@@ -172,26 +212,35 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 ensembl_data_id = json.loads(data_1)
                 gene_id = ensembl_data_id[0]
                 gene_id = gene_id['id']
-
+                # ---- Read the response message from the server
+                # ---- Read the response's body
+                # ---- Create a variable with the species data from the JSON received
                 endpoint_2 = '/sequence/id/'
                 params_2 = gene_id + PARAMS
                 conn.request("GET", endpoint_2 + params_2)
                 response_2 = conn.getresponse()
                 data_2 = response_2.read().decode("utf-8")
-                ensembl_data = json.loads(data_2)
-                contents = Path("human gene.html").read_text()
+                ensembl_data = json.loads(data_2)  # --- Used by all below, better to define it first
+                contents = Path("human gene.html").read_text()   # ---- This html is used by all the resources below it
                 self.send_response(200)
 
+                # ---------Returns the sequence of a human gene
                 if resource == "/geneSeq":
                     gene_seq = ''
                     gene_seq += ensembl_data['seq']
+                    # ----------------- Response in json , json.dumps creates it
                     if 'json=1' in request_line[1]:
                         json_data = {'Gene name:': {gene_name: {'Sequence': gene_seq}}}
                         contents =json.dumps(json_data)
+                    # ----------------- Response in html
                     else:
                         contents += f"<h2>The sequence of the gene {gene_name} is : </h2>"
                         contents += f"<textarea readonly rows = 20 cols = 90>{gene_seq}</textarea>"
+                # --------- Return info about a human gene
                 if resource == '/geneInfo':
+                    # ---- Read the response message from the server
+                    # ---- Read the response's body
+                    # ---- Create a variable with the species data from the JSON received
                     endpoint_3 = '/lookup/id/'
                     params_3 = gene_id + PARAMS
                     conn.request("GET", endpoint_3 + params_3)
@@ -199,12 +248,14 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     data = response_3.read().decode("utf-8")
                     ensembl_seq = json.loads(data)
                     sequence = Seq(ensembl_data['seq'])
+                    # ----------------- Response in json , json.dumps creates it
                     if 'json=1' in request_line[1]:
                         json_data = {'Gene': gene_name, 'Start': ensembl_seq ['start'],
                                      'End': ensembl_seq ['end'],
                                      'Length': sequence.len(), 'Chromosome': ensembl_seq ['seq_region_name'],
                                      'ID': gene_id}
                         contents = json.dumps(json_data)
+                    # ----------------- Response in html
                     else:
                         contents += f"<h2>Information about the gene: {gene_name}</h2>"
                         contents += f"<p>Start: {ensembl_seq['start']}</p>"
@@ -212,8 +263,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         contents += f"<p>Length: {sequence.len()}</p>"
                         contents += f"<p>In chromosome: {ensembl_seq['seq_region_name']}</p>"
                         contents += f"<p>ID: {gene_id}</p>"
+                # --------- Perform calculations on a sequence of a human gene
                 if resource == "/geneCalc":
                     sequence = Seq(ensembl_data['seq'])
+                    # ----------------- Response in json , json.dumps creates it
                     if 'json=1' in request_line[1]:
                         for item in bases:
                             contents += f"<p>{item} : {sequence.count_base(item)} ({round(sequence.count_base(item) * (100 / sequence.len()), 2)}%)</p> "
@@ -226,6 +279,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             sequence.count_base('G'): {
                                 'Percentage': (round(sequence.count_base('G') * (100 / sequence.len()), 2))}}}
                         contents = json.dumps(json_data)
+                    # ----------------- Response in html
                     else:
                         contents += f"<h2>Calculations of the gene: {gene_name}</h2>"
                         contents += f"<p>Length: {sequence.len()}</p>"
@@ -237,10 +291,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             # Generating the response message
             contents = Path('Error.html').read_text()
             self.send_response(error_code)
+            # Response in json
         if 'json=1' in request_line[1]:
             self.send_header('Content-Type', 'application/json')
             self.send_header('Content-Length', len(str.encode(contents)))
         else:
+            # Response in html
             self.send_header('Content-Type', 'text/html')
             self.send_header('Content-Length', len(str.encode(contents)))
 
