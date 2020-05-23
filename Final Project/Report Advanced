@@ -36,7 +36,7 @@ http://localhost:8080/karyotype?specie=zebrafish&json=1
 
 * Input:
 
-http://localhost:8080/chromosomeLength?specie=mouse&chromo=18&json=1
+http://localhost:8080/chromosomeLength?specie=mouse&chromo=1&json=1
 
 * Output:
 
@@ -105,10 +105,11 @@ http://localhost:8080/geneInfo?gene=FXN&json=1
 
 * Input:
 
-http://localhost:8080/geneInfo?gene=FGR3&json=1
+http://localhost:8080/geneInfo?gene=ADA&json=1
 
 * Output:
-{"Gene": "FGFR3", "Start": 1793293, "End": 1808872, "Length": 15580, "Chromosome": "4", "ID": "ENSG00000068078"}
+{"Gene": "ADA", "Start": 44619522, "End": 44652233, "Length": 32712, "Chromosome": "20", "ID": "ENSG00000196839"}
+
 
 
 -----------------------------------------------> geneCalc ENDPOINT
