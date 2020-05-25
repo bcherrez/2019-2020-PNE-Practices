@@ -1,6 +1,130 @@
 
 Final Project Basic Report
 ====================
+----------------------------------> Main("/") endpoint
+* TEST :
+* Input:
+http://127.0.0.1:8080/
+
+* Output:
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Final Project</title>
+  </head>
+  <body style="background-color: turquoise;">
+    <h2>Browsing Human and Vertebrates genome </h2>
+    <h3>BASIC Level Services </h3>
+
+    <form action="/listSpecies" method="get">
+      <br>
+      1)List of species in the genome database
+      <br>
+      <br>
+      Limit: <input type="number" name="limit" min="0" max="286">
+      <br>
+      <br>
+      Do you want to convert it in JSON format? <input type="checkbox" value="1" name="json">
+      <br>
+      <br>
+      <input type="submit" value="Send">
+      <br><br>
+    </form>
+
+    <form action="/karyotype" method="get">
+      <br>
+      2)Information about the karyotype:
+       <br>
+       <br>
+      Select the species: <input type="text" name = "specie" >
+      <br>
+      <br>
+       Do you want to convert it in JSON format? <input type="checkbox" value="1" name="json">
+      <br>
+      <br>
+      <input type="submit" value="Send">
+      <br><br>
+    </form>
+
+    <form action="/chromosomeLength" method="get">
+      <br>
+      3)Chromosome length
+      <br>
+      <br>
+      Select the species: <input type="text" name="specie">
+      <br>
+      <br>
+      Select a chromosome: <input type="text" name="chromo">
+      <br>
+      <br>
+        Do you want to convert it in JSON format? <input type="checkbox" value="1" name="json">
+      <br>
+      <br>
+      <input type="submit" value="Send">
+      <br><br>
+    </form>
+
+    <h3>MEDIUM Level Services </h3>
+    <form action="geneSeq" method="get">
+      <p>4) Sequence of a human gene</p>
+      Select the gene:  <input type="text" name="gene">
+      <br>
+      <br>
+        Do you want to convert it in JSON format? <input type="checkbox" value="1" name="json">
+      <br>
+      <br>
+        <input type="submit" value="Send"/>
+      <br>
+
+     </form>
+
+    <form action="geneInfo" method="get">
+      <br>
+      <p>5) Information about a human gene</p>
+      Select the gene:  <input type="text" name="gene">
+      <br>
+       <br>
+       Do you want to convert it in JSON format? <input type="checkbox" value="1" name="json">
+      <br>
+      <br>
+        <input type="submit" value="Send"/>
+      <br>
+    </form>
+
+    <form action="geneCalc" method="get">
+      <br>
+      <p>6) Calculations with a human gene</p>
+      Select the gene:  <input type="text" name="gene">
+      <br>
+       <br>
+       Do you want to convert it in JSON format? <input type="checkbox" value="1" name="json">
+      <br>
+      <br>
+        <input type="submit" value="Send"/>
+      <br>
+    </form>
+
+    <form action="geneList" method="get">
+      <br>
+      <p>7) Names of the genes in a specific chromosome:</p>
+      Select the chromosome:  <input type="text" name="chromo">
+      <br>
+      <br>
+      Select a start point:  <input type="text" name="start">
+      <br>
+      <br>
+      Select an end point:  <input type="text" name="end">
+      <br>
+      <br>
+       Do you want to convert it in JSON format? <input type="checkbox" value="1" name="json">
+      <br>
+      <br>
+        <input type="submit" value="Send"/>
+      <br>
+    </form>
+  </body>
+</html>
 
 ----------------------------------> listSpecies endpoint
 * TEST 1:
