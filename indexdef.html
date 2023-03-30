@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<form action="/submit" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name"><br><br>
+
+  <label for="NHC">NHC:</label>
+  <input type="text" id="NHC" name="NHC"><br><br>
+
+
+  <label for="age">Age:</label>
+  <input type="text" id="age" name="age"><br><br>
+
+  <label for="gender">Gender:</label>
+  <select id="gender" name="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="other">Other</option>
+  </select><br><br>
+
+  <label for="apache">Apache:</label>
+  <input type="text" id="apache" name="apache"><br><br>
+
+  <label for="saps">SAPS:</label>
+  <input type="text" id="saps" name="saps"><br><br>
+
+  <label for="charlson">CHARLSON:</label>
+  <input type="text" id="charlson" name="charlson"><br><br>
+
+
+  <label for="institucionalizado">Institucionalizado:</label>
+  <select id="institucionalizado" name="institucionalizado">
+    <option value="si">Si</option>
+    <option value="no">No</option>
+    <option value="other">Other</option>
+  </select><br><br>
+
+  <label for="estadoc">Estado civil:</label>
+  <input type="text" id="estadoc" name="estadoc"><br><br>
+
+  <label for="fechaing">Fecha de ingreso :</label>
+  <input type="text" id="fechaing" name="fechaing"><br><br>
+
+  <label for="fechauci">Fecha alta UCI:</label>
+  <input type="text" id="fechauci" name="fechauci"><br><br>
+
+  <label for="fechahosp">Fecha alta hospital:</label>
+  <input type="text" id="fechahosp" name="fechahosp"><br><br>
+
+  <form>
+    <label for="sintomas">Síntomas físicos(marcar si los padece)</label><br>
+    <input type="text" id="sintomas" name="sintomas"><br><br>
+    <label for="debilidad muscular">Debilidad muscular</label><br>
+    <input type="checkbox" id="debilidad muscular" name="síntomaf" value="debilidad muscular">
+    <label for="fatiga persistente con esfuerzos menores a lo habitual">Fatiga persistente con esfuerzos menores a lo habitual</label><br>
+    <input type="checkbox" id="fatiga persistente con esfuerzos menores a lo habitual" name="síntomaf" value="fatiga persistente con esfuerzos menores a lo habitual">
+    <label for="dificultad para movilidad grosera (tono, caminar, transferencias)">Dificultad para movilidad grosera (tono, caminar, transferencias)</label><br>
+    <input type="checkbox" id="dificultad para movilidad grosera (tono, caminar, transferencias)" name="síntomaf" value="dificultad para movilidad grosera (tono, caminar, transferencias)">
+    <label for="dificultad para movilidad fina (manos, dedos)">Dificultad para movilidad fina (manos, dedos)</label><br>
+    <input type="checkbox" id="dificultad para movilidad fina (manos, dedos)" name="síntomaf" value="dificultad para movilidad fina (manos, dedos)">
+    <label for="dolores musculoesqueléticos">Dolores musculoesqueléticos</label><br>
+    <input type="checkbox" id="dolores musculoesqueléticos" name="síntomaf" value="dolores musculoesqueléticos">
+    <label for="disfagia">Disfagia</label><br>
+    <input type="checkbox" id="disfagia" name="síntomaf" value="disfagia">
+    <label for="pérdida de peso">Pérdida de peso</label><br>
+    <input type="checkbox" id="pérdida de peso" name="síntomaf" value="pérdida de peso">
+    <label for="Pérdida de apetito">Pérdida de apetito</label><br>
+    <input type="checkbox" id="pérdida de apetito" name="síntomaf" value="pérdida de apetito">
+    <label for="úlceras por presión">Úlceras por presión</label><br>
+    <input type="checkbox" id="úlceras por presión" name="síntomaf" value="úlceras por presión">
+    <label for="dificultad respiratoria(si marca contestar siguiente pregunta)">Dificultad respiratoria( si marca contestar siguiente pregunta)</label><br>
+    <input type="checkbox" id="dificultad respiratoria(si marca contestar siguiente pregunta)" name="síntomaf" value="dificultad respiratoria(si marca contestar siguiente pregunta)">
+    <label for="problemas con los dispositivos (traqueo, osteomías)">Problemas con los dispositivos (traqueo, osteomías)</label><br>
+    <input type="checkbox" id="problemas con los dispositivos (traqueo, osteomías)" name="síntomaf" value="problemas con los dispositivos (traqueo, osteomías)">
+    <label for="caída de pelo">Caída de pelo </label><br>
+    <input type="checkbox" id="caída de pelo" name="síntomaf" value="caída de pelo">
+    <label for="alteración visión">Alteración visión</label><br>
+    <input type="checkbox" id="alteración visión" name="síntomaf" value="alteración visión">
+
+</form>
+
+
+  <label for="dificultadr">Si ha marcado la opción 'Dificultad respiratoria'.  CF: (NYHA):</label>
+  <input type="text" id="dificultadr" name="dificultadr"><br><br>
+
+
+  <form>
+    <label for="sintomas1">Síntomas mentales</label><br>
+    <input type="text" id="sintomas1" name="sintomas1"><br><br>
+    <label for="problemas para conciliar el sueño">Problemas para conciliar el sueño</label><br>
+    <input type="checkbox" id="problemas para conciliar el sueño" name="síntomas" value="problemas para conciliar el sueño">
+    <label for="pesadillas">Pesadillas</label><br>
+    <input type="checkbox" id="pesadillas" name="síntomas" value="pesadillas">
+    <label for="pesadillas relacionadas con el ingreso">Pesadillas relacionadas con el ingreso</label><br>
+    <input type="checkbox" id="pesadillas relacionadas con el ingreso" name="síntomas" value="pesadillas relacionadas con el ingreso">
+</form>
+
+
+  <form>
+    <label for="sintomas2">Síntomas psicológicos</label><br>
+    <input type="text" id="sintomas2" name="sintomas2"><br><br>
+    <label for="dificultad para concentrarse">Dificultad para concentrarse</label><br>
+    <input type="checkbox" id="dificultad para concentrarse" name="síntoma" value="dificultad para concentrarse">
+    <label for="pensamientos o recuerdos irruptivos">Pensamientos o recuerdos irruptivos</label><br>
+    <input type="checkbox" id="pensamientos o recuerdos irruptivos" name="síntoma" value="pensamientos o recuerdos irruptivos">
+    <label for="miedo">Miedo</label><br>
+    <input type="checkbox" id="miedo" name="síntoma" value="miedo">
+    <label for="ansiedad">Ansiedad</label><br>
+    <input type="checkbox" id="ansiedad" name="síntoma" value="ansiedad">
+    <label for="ánimo depresivo">Ánimo depresivo</label><br>
+    <input type="checkbox" id="ánimo depresivo" name="síntoma" value="ánimo depresivo">
+</form>
+
+
+
+ <form>
+   <label for="sintomas3">Situación basal</label><br>
+   <input type="text" id="sintomas3" name="sintomas3"><br><br>
+   <label for="dependiente ABVD">Dependiente ABVD</label><br>
+   <input type="checkbox" id="dependiente ABVD" name="sintomab" value="dependiente ABVD">
+   <label for="parcialmente dependiente ABVD">Parcialmente dependiente ABVD </label><br>
+   <input type="checkbox" id="parcialmente dependiente ABVD" name="sintomab" value="parcialmente dependiente ABVD">
+   <label for="independiente">Independiente</label><br>
+   <input type="checkbox" id="independiente" name="sintomab" value="independiente">
+</form>
+
+
+
+  <form>
+    <label for="sintomas4">Nivel actividad</label><br>
+    <input type="text" id="sintomas4" name="sintomas4"><br><br>
+    <label for="encamado">Encamado</label><br>
+    <input type="checkbox" id="encamado" name="sintomact" value="encamado">
+    <label for="cama-sillón">Cama-sillón</label><br>
+    <input type="checkbox" id="cama-sillón" name="sintomact" value="cama-sillón">
+    <label for="camina por casa">Camina por casa</label><br>
+    <input type="checkbox" id="camina por casa" name="sintomact" value="camina por casa">
+    <label for="sale a la calle">Sale a la calle</label><br>
+    <input type="checkbox" id="sale a la calle" name="sintomact" value="sale a la calle">
+    <label for="vida normal pero no trabaja">Vida normal pero no trabaja</label><br>
+    <input type="checkbox" id="vida normal pero no trabaja" name="sintomact" value="vida normal pero no trabaja">
+    <label for="ya no trabaja">Ya no trabaja</label><br>
+    <input type="checkbox" id="ya no trabaja" name="sintomact" value="ya no trabaja">
+    <label for="ha vuelto a conducir">Ha vuelto a conducir</label><br>
+    <input type="checkbox" id="ha vuelto a conducir" name="sintomact" value="ha vuelto a conducir">
+</form>
+
+
+
+  <label for="observaciones">Observaciones:</label>
+  <input type="text" id="observaciones" name="observaciones"><br><br>
+
+
+  <label for="deficitn ">Déficit neurológico de nueva aparición:(especificar):</label>
+  <input type="text" id="deficitn " name="deficitn"><br><br>
+
+<label for="otross ">Otros síntomas que considere relevantes o relacionados con el ingreso:</label>
+  <input type="text" id="otross " name="otross"><br><br>
+
+
+
+  <label for="seguimiento">Seguimiento:</label>
+  <select id="seguimiento" name="seguimiento">
+    <option value="sigue en rehabilitación">Sigue en rehabilitación</option>
+    <option value="esta en seguimiento en salud mental">Está en seguimiento en salud mental</option>
+    <option value="other">Other</option>
+  </select><br><br>
+
+  <input type="submit" value="Submit">
+</form>

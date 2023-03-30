@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Submitted</title>
+</head>
+<body>
+	<h1>Form Submitted Successfully</h1>
+	<p>Thank you for submitting the form. Here is a summary of your responses:</p>
+	<ul>
+		<li>Name: {{ name }}</li>
+		<li>Age: {{ age }}</li>
+    <li>Gender: {{ gender }}</li>
+		<li>Apache: {{ apache }}</li>
+		<li>SAPS: {{ saps }}</li>
+		<li>CHARLSON: {{ charlson }}</li>
+		<li>Institucionalizado: {{ institucionalizado }}</li>
+		<li>Estado civil: {{ estadoc }}</li>
+		<li>Fecha de ingreso: {{ fechaing }}</li>
+		<li>Fecha alta UCI: {{ fechauci }}</li>
+		<li>Fecha alta hospital: {{ fechahosp }}</li>
+		{% if sintomas %}
+		<li>Síntomas físicos:</li>
+		<ul>
+			{% for sintomaf in sintomasf %}
+			<li>{{ sintomaf }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+        <li>Si ha marcado la opción Dificultad respiratoria.CF: (NYHA): {{ dificultadr }}</li>
+		{% if sintomas1 %}
+		<li>Síntomas mentales:</li>
+		<ul>
+			{% for sintoma in sintomas %}
+			<li>{{ sintoma }}</li>
+			{% endfor %}
+		</ul>
+		{% if sintomas2 %}
+		<li>Síntomas psicológicos:</li>
+		<ul>
+			{% for síntoma in síntomas %}
+			<li>{{ síntoma }}</li>
+			{% endfor %}
+		</ul>
+		{% if sintomas3 %}
+		<li>Situación basal:</li>
+		<ul>
+			{% for sintomab in sintomabs %}
+			<li>{{ sintomab }}</li>
+			{% endfor %}
+		</ul>
+		{% if sintomas4 %}
+		<li>Nivel actividad:</li>
+		<ul>
+			{% for sintomact in sintomacts %}
+			<li>{{ sintomact }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		<li>Observaciones: {{ observaciones }}</li>
+		<li>Déficit neurológico de nueva aparición:(especificar): {{ deficitn }}</li>
+		<li>Otros síntomas que considere relevantes o relacionados con el ingreso: {{ otross }}</li>
+		<li>Seguimiento: {{ seguimiento }}</li>
+
+	</ul>
+</body>
+</html>
+
+
